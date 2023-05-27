@@ -10,44 +10,51 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) 
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
     {
-        if(l1 == NULL) return l2;
-        if(l2 == NULL) return l1;
+        //return the head of list2 if list1 does not exist
+        if(list1==NULL)
+            return list2;
+        //return the head of list1 if list2 does not exist
+        if(list2==NULL)
+            return list1;
 
-
-        if(l1->val > l2->val)
-        {                                    // taking L1 is smaller than l2 
-            swap(l1,l2);                                            // haar baar l1 hi chota hoga
-        }
-        ListNode* result = l1;
-        ListNode* temp = NULL;
-        while(l1 != NULL && l2 != NULL)
+        //to store the head of reultant link list
+        ListNode *result = NULL, *temp=NULL;  
+        //deciding head node  
+        if(list1->val<=list2->val)
         {
-            
-            if(l1->val <= l2->val )
+            result = list1;
+            list1 = list1->next;
+        }
+        else
+        {
+            result = list2;
+            list2 = list2->next;
+        }
+        temp = result;
+        //adding rest nodes with comparisions
+        while(list1!=NULL && list2!=NULL)
+        {
+            if(list1->val<=list2->val)
             {
-                temp = l1;
-                l1 = l1->next;
+                temp->next = list1;
+                list1 = list1->next;
             }
             else
             {
-                temp -> next = l2;
-                swap(l1,l2);                                          // haar baar l1 hi chota hoga
+                temp->next = list2;
+                list2 = list2->next;
             }
+            temp = temp->next;
         }
-        while(l1 != NULL)
-        {
-            temp->next = l1;
-            temp = l1;
-            l2 = l2->next;
-        }
-        while(l2 != NULL)
-        {
-            temp->next = l2;
-            temp = l2;
-            l2 = l2 ->next;
-        }     
+        //left over nodes in list1;
+        if(list1!=NULL)
+            temp->next = list1;
+        //left over nodes in list2;
+        if(list2!=NULL)
+            temp->next = list2;
+        
         return result;
     }
 };
