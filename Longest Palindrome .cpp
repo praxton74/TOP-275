@@ -2,28 +2,29 @@ class Solution {
 public:
     int longestPalindrome(string s) 
     {
-        int oc=0;
         map<char,int>mp;
         for(int i=0;i<s.length();i++)
         {
             mp[s[i]]++;
-            if(mp[s[i]]%2==0)
+        }
+        bool odd=false;
+        int l=0;
+        for(auto i: mp)
+        {
+            if(i.second%2!=0)
             {
-                oc--;
+                odd=true;
+                l+=i.second-1;
             }
             else
             {
-                oc++;
+                l+=i.second;
             }
         }
-
-        if(oc<1)
+        if(odd)
         {
-            return s.length();
+            return l+1;
         }
-        else
-        {
-            return s.length()+1-oc;
-        }
+        return l;
     }
 };
