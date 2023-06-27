@@ -15,8 +15,6 @@ public:
         if(head==nullptr || head->next==nullptr)
             return head->next;
         
-        ListNode* start=new ListNode();
-        start->next=head;
         
         ListNode*f=start;
         ListNode*s=start;
