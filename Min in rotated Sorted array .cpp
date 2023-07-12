@@ -15,6 +15,12 @@ public:
             {
                 end = mid;
             }
+
+            /* else
+            {
+                end--;                     //if duplicates are there
+            }
+                */
         }
         return nums[start];
     }
